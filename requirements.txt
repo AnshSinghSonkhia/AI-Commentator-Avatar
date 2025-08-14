@@ -1,0 +1,15 @@
+gTTS
+moviepy
+opencv-python
+numpy
+requests
+newspaper3k
+GoogleNews
+tqdm
+torch
+torchvision
+pygame
+lxml_html_clean
+scipy
+pillow
+pyttsx3

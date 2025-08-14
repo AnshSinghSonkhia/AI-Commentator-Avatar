@@ -37,7 +37,7 @@ if st.button("Generate Avatar Video"):
     if commentary_text:
         st.info("Generating avatar video...")
         audio_path = text_to_speech(commentary_text)
-        avatar_path = os.path.join(os.path.dirname(__file__), "avatar-tech.png")
+        avatar_path = os.path.join(os.path.dirname(__file__), "assets/avatars/avatar-tech.png")
         if validate_avatar(avatar_path):
             video_path = avatar_generation.generate_lip_synced_video(audio_path, avatar_path)
             if video_path and os.path.exists(video_path):

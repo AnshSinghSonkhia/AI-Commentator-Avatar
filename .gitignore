@@ -94,3 +94,12 @@ Desktop.ini
 .idea/
 *.sublime-workspace
 *.sublime-project
+
+# Temp Files
+temp/
+
+# Model Checkpoints
+Wav2Lip/checkpoints/
+
+# Output Files
+output/

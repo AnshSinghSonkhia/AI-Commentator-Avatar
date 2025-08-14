@@ -25,14 +25,10 @@
   <a href="https://www.youtube.com/watch?v=KXMh7-ApLBg" target="_blank">
     <img src="https://github.com/user-attachments/assets/837fd679-4163-43e2-af0e-31fdb0e4a65f" 
          alt="Ansh Singh Sonkhia on News" 
-         width="2816" height="1536" />
+         width="2816" height="1536"/
+    >
   </a>
 </p>
-<!-- [![Watch the video](https://img.youtube.com/vi/KXMh7-ApLBg/0.jpg)](https://www.youtube.com/watch?v=KXMh7-ApLBg) -->
-<!--
-<img width="2816" height="1536" alt="avatar-tech" src="https://github.com/user-attachments/assets/837fd679-4163-43e2-af0e-31fdb0e4a65f" />
--->
-
 
 ## 🌟 Overview
 
@@ -51,8 +47,8 @@ Transform sports news and live commentary into engaging video content with our A
 
 ## 🆕 New Features (Aug, 2025)
 
-- Select TTS method: Choose between gTTS (online) and pyttsx3 (offline)
-- Voice selection: Pick from available system voices when using pyttsx3
+- Select TTS method: Choose between gTTS (online), pyttsx3 (offline) or coqui ai (offline)
+- Voice selection: Pick from available system voices when using pyttsx3 or coqui-tts
 - All features accessible via the GUI
 - Streamlit web app: Run `streamlit run streamlit-app.py` for a browser-based experience
 
@@ -104,9 +100,15 @@ AI-Sports-Commentator/
    pip install -r requirements.txt
    ```
 
-4. **Download Pretrained Wav2Lip Model:**
-   - Download from: [Wav2Lip GitHub](https://github.com/Rudrabha/Wav2Lip)
-   - Place the Wav2Lip.pth file in the project directory or models folder.
+4. **Download Pre-trained & Setup:**
+    - Windows
+    ```bash
+    python setup.py
+    ```
+    - Linux / MacOS
+    ```bash
+    python3 setup.py
+    ```
 
 5. **Run the Project:**
     - **Tkinter GUI:**
@@ -130,7 +132,6 @@ The final output video will be saved as `output/result_voice.mp4`, showcasing th
 
 ## 📜 Dependencies
 
-
 - Python 3.7+
 - gTTS
 - pyttsx3
@@ -145,6 +146,7 @@ The final output video will be saved as `output/result_voice.mp4`, showcasing th
 - ffmpeg (installed and added to system path)
 - Pillow (for image processing in GUI)
 - streamlit (for web app)
+- coqui-tts
 
 ## 📬 Contact
 

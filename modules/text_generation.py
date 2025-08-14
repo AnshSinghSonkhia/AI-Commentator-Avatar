@@ -1,5 +1,3 @@
-# modules/text_generation.py
-
 from GoogleNews import GoogleNews
 from newspaper import Article
 from urllib.parse import urlparse, urlunparse
@@ -55,7 +53,3 @@ def fetch_latest_news_with_content(topic="India", count=3):
         print("=" * 100)
 
     return final_combined_content.strip()
-
-
-
-

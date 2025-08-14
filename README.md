@@ -152,7 +152,11 @@ The final output video will be saved as `output/result_voice.mp4`, showcasing th
 
 For any queries or issues, please contact via GitHub issues or open a pull request.
 
----
+## 🌟 Contributors
+
+<a href="https://github.com/AnshSinghSonkhia/AI-Commentator-Avatar/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=AnshSinghSonkhia/AI-Commentator-Avatar" />
+</a>
 
 <p align="center">
   <i>Brought to you by Ansh Singh Sonkhia, B.Tech in CSE (Artificial Intelligence and Machine Learning)</i>

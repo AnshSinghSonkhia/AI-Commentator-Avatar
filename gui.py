@@ -42,7 +42,7 @@ class NewsAnchorApp:
     def setup_ui(self):
         # TTS Method Option
         self.tts_method_var = tk.StringVar(value="gtts")
-        tts_method_label = tk.Label(self.root, text="TTS Method:", fg="white", font=("Times New Roman", 14), bg="#001638")
+        tts_method_label = tk.Label(self.root, text="TTS Method:", fg="white", font=("Times New Roman", 14), bg="#de2526")
         tts_method_label.place(relx=0.27, rely=0.25, anchor="center")
         self.tts_method_menu = ttk.Combobox(self.root, textvariable=self.tts_method_var, values=["gtts", "pyttsx3"], state="readonly", width=10)
         self.tts_method_menu.place(relx=0.36, rely=0.25, anchor="center")
@@ -74,39 +74,39 @@ class NewsAnchorApp:
             
         # Title
         self.title_label = tk.Label(self.root, text="", font=("Times New Roman", 36, "bold"),
-                                    fg="cyan", bg="#010513")
+                                    fg="white", bg="#de2526")
         self.title_label.pack(pady=15)
 
         # Topic Label and Entry
-        self.topic_label = tk.Label(self.root, text="Topic:", fg="white", font=("Times New Roman", 16), bg="#001638")
+        self.topic_label = tk.Label(self.root, text="Topic:", fg="white", font=("Times New Roman", 16), bg="#de2526")
         self.topic_label.place(relx=0.27, rely=0.21, anchor="center")
 
-        self.topic_entry = tk.Entry(self.root, width=25, font=("Times New Roman", 12), bg="#001638", fg="#00ffff",
+        self.topic_entry = tk.Entry(self.root, width=25, font=("Times New Roman", 12), bg="#de2526", fg="white",
                                     insertbackground="white", relief="solid", bd=2)
         self.topic_entry.place(relx=0.36, rely=0.212, anchor="center")
 
         # Count Label and Entry
-        self.count_label = tk.Label(self.root, text="Count:", fg="white", font=("Times New Roman", 16), bg="#001638")
+        self.count_label = tk.Label(self.root, text="Count:", fg="white", font=("Times New Roman", 16), bg="#de2526")
         self.count_label.place(relx=0.535, rely=0.21, anchor="center")
 
-        self.count_entry = tk.Entry(self.root, width=5, font=("Times New Roman", 12), bg="#001638", fg="#00ffff",
+        self.count_entry = tk.Entry(self.root, width=5, font=("Times New Roman", 12), bg="#de2526", fg="white",
                                     insertbackground="white", relief="solid", bd=2)
         self.count_entry.place(relx=0.575, rely=0.212, anchor="center")
 
         # Input instruction label
         input_label = tk.Label(self.root, text="✍️ Enter your own news text or fetch from Google News:",
-                               fg="white", font=("Times New Roman", 16), bg="#02295a")
+                               fg="white", font=("Times New Roman", 16), bg="#de2526")
         input_label.place(relx=0.5, rely=0.35, anchor="center")
 
         # News content textbox
         # Frame to hold text box and scrollbar
-        text_frame = tk.Frame(self.root, bg="#02295a")
+        text_frame = tk.Frame(self.root, bg="#de2526")
         text_frame.place(relx=0.5, rely=0.50, anchor="center")
 
         # Text widget
         self.text_box = tk.Text(
             text_frame, wrap=tk.WORD, width=100, height=10,
-            font=("Consolas", 14), bg="#02295a", fg="#00ffff",
+            font=("Consolas", 14), bg="#de2526", fg="white",
             insertbackground="white", relief="solid", bd=1
         )
         self.text_box.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
@@ -114,7 +114,7 @@ class NewsAnchorApp:
         # Custom Scrollbar
         scrollbar = tk.Scrollbar(
             text_frame, command=self.text_box.yview,
-            bg="#02295a", activebackground="#02295a", troughcolor="#001638",
+            bg="#de2526", activebackground="#02295a", troughcolor="white",
             bd=0, relief="flat"
         )
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
@@ -122,7 +122,7 @@ class NewsAnchorApp:
         self.text_box.config(yscrollcommand=scrollbar.set)
 
         # ✅ Moved Status label BELOW text box and ABOVE buttons
-        self.status_label = tk.Label(self.root, text="", fg="lime", font=("Arial", 14, "italic"), bg="black")
+        self.status_label = tk.Label(self.root, text="", fg="lime", font=("Arial", 14, "italic"), bg="#de2526")
         self.status_label.place(relx=0.5, rely=0.61, anchor="center")
 
 
@@ -133,10 +133,10 @@ class NewsAnchorApp:
         self.add_button("  ❌ Exit  ", self.root.quit, 0.57,0.81)
 
         # Footer
-        self.creator_label = tk.Label(self.root, text="Created in India",
-                                      font=("Times New Roman", 16, "bold"),
-                                      fg="#FFCC00", bg="#000f2f")
-        self.creator_label.place(relx=1.0, rely=1.0, x=-10, y=-10, anchor="se")
+        # self.creator_label = tk.Label(self.root, text="Made in India",
+        #                               font=("Times New Roman", 16, "bold"),
+        #                               fg="white", bg="#138808")
+        # self.creator_label.place(relx=1.0, rely=1.0, x=-10, y=-10, anchor="se")
 
     def add_button(self, text, command, relx_value, rely_value):
         def on_click_with_sound():
@@ -146,7 +146,7 @@ class NewsAnchorApp:
             command()
 
         btn = tk.Button(self.root, text=text, command=on_click_with_sound,
-                        bg="#010c1c", fg="cyan", activebackground="#3949ab",
+                        bg="#de2526", fg="white", activebackground="#3949ab",
                         activeforeground="white", relief="solid", bd=1,
                         font=("Times New Roman", 12, "bold"), padx=15, pady=5,
                         cursor="hand2", width=16, height=1)
@@ -179,7 +179,7 @@ class NewsAnchorApp:
         popup = tk.Toplevel(self.root)
         popup.title("Welcome")
         popup.overrideredirect(True)
-        popup.configure(bg="#012d4d")
+        popup.configure(bg="#de2526")
 
         # Get screen width and height
         screen_width = self.root.winfo_screenwidth()
@@ -198,8 +198,8 @@ class NewsAnchorApp:
             popup,
             text="🎙️ Welcome to the Virtual News Anchor Studio!",
             font=("Times New Roman", 20, "bold"),
-            fg="cyan",
-            bg="#02295a",
+            fg="white",
+            bg="#de2526",
             pady=25,
             padx=35
         )

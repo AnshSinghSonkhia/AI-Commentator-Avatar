@@ -5,57 +5,33 @@ try:
     import pyttsx3
 except ImportError:
     pyttsx3 = None
-    
-try:
-    from TTS.api import TTS
-except ImportError:
-    TTS = None
 
-def text_to_speech(news_text: str, method: str = "gtts", voice_id: str = None) -> str:
+def text_to_speech(news_text, method="gtts", voice_id=None):
     """
     Converts text to speech using either gTTS (online) or pyttsx3 (offline).
     method: 'gtts' or 'pyttsx3' or 'TTS'
     voice_id: pyttsx3 voice id (optional)
     """
-    audio_path = "temp/output.mp3"
-    
-    import os
+    audio_path = "output.mp3"
+    if method == "pyttsx3":
+        if pyttsx3 is None:
+            raise ImportError("pyttsx3 is not installed. Install it with 'pip install pyttsx3'.")
+        engine = pyttsx3.init()
+        voices = engine.getProperty('voices')
+        if voice_id is not None:
+            engine.setProperty('voice', voice_id)
+        else:
+            engine.setProperty('voice', voices[0].id)  # Default voice
+        engine.save_to_file(news_text, audio_path)
+        engine.runAndWait()
+        print(f"	Audio generated: {audio_path} (pyttsx3)")
+    else:
+        tts = gTTS(text=news_text, lang="en")
+        tts.save(audio_path)
+        print(f"	Audio generated: {audio_path} (gTTS)")
 
-    if not os.path.exists("temp/"):
-        os.makedirs("temp")
-
-    match method:
-        case 'pyttsx3':``
-            if pyttsx3 is None:
-                raise ImportError("pyttsx3 is not installed. Install it with 'pip install pyttsx3'.")
-            
-            engine = pyttsx3.init()
-            voices = engine.getProperty('voices')
-            
-            if voice_id:
-                engine.setProperty('voice', voice_id)
-            else:
-                engine.setProperty('voice', voices[0].id)
-                
-            engine.save_to_file(news_text, audio_path)
-            engine.runAndWait()
-        case 'TTS':
-            if TTS is None:
-                raise ImportError("TTS is not installed. Install it with 'pip install coqui-tts'.")
-
-            tts = TTS(model_name="tts_models/en/vctk/vits", progress_bar=True)
-            tts.to('cuda')
-            
-            if not voice_id:
-                voice_id = 'p244'
-            
-            tts.tts_to_file(text=news_text, speaker=voice_id, file_path=audio_path)
-        case _:
-            tts = gTTS(text=news_text, lang="en")
-            tts.save(audio_path)
-
-    print(f"c✅ Audio generated: {audio_path} - {method}")
-            
+    # Play the generated audio
+    os.system(f"start {audio_path}")  # For Windows
     return audio_path
 
 def list_pyttsx3_voices():

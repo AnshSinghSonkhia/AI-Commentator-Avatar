@@ -27,11 +27,13 @@ try:
         filename = url["fname"]
         file_path = f'{save_dir}\\{filename}'
 
-        print(f"Downloading {url['link']} to {file_path}...")
+        if os.path.exists(file_path):
+            print(f"✅ {filename} already exists. Skipping download.")
+            continue
 
+        print(f"Downloading {url['link']} to {file_path}...")
         response = requests.get(url["link"])
         response.raise_for_status()
-        
         with open(file_path, "wb") as f:
             f.write(response.content)
 

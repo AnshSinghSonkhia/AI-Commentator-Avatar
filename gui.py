@@ -22,7 +22,7 @@ class NewsAnchorApp:
         self.news_content = ""
 
         # Load and place background image
-        bg_image_path = "assets/news_background.png"
+        bg_image_path = "assets/studio.png"
         bg_image = Image.open(bg_image_path)
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()

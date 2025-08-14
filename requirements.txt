@@ -6,8 +6,8 @@ requests
 newspaper3k
 GoogleNews
 tqdm
-torch
-torchvision
+torch>=1.11.0
+torchvision>=0.12.0
 pygame
 lxml_html_clean
 scipy

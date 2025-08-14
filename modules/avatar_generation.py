@@ -5,7 +5,6 @@ import numpy as np
 from pathlib import Path
 import sys
 
-
 def validate_image_file(filepath):
     """Thorough validation of image file using multiple methods"""
     try:
@@ -19,7 +18,6 @@ def validate_image_file(filepath):
     except Exception as e:
         print(f"❌ PIL validation failed: {str(e)}")
         return False
-
 
 def load_avatar_image(filepath):
     """Robust image loading with multiple fallbacks"""
@@ -50,7 +48,6 @@ def load_avatar_image(filepath):
 
     return None
 
-
 def generate_lip_synced_video(audio_path, face_path=None, output_path="output/result_voice.mp4"):
     print("🎥 Generating lip-synced AI avatar video...")
 
@@ -59,7 +56,7 @@ def generate_lip_synced_video(audio_path, face_path=None, output_path="output/re
 
     # Set default face path if not provided
     if face_path is None:
-        face_path = project_root / "avatar-tech.png"
+        face_path = project_root / "assets/avatars/avatar-tech.png"
 
     # Convert all paths to absolute and string
     face_path = str(Path(face_path).absolute())
@@ -86,7 +83,9 @@ def generate_lip_synced_video(audio_path, face_path=None, output_path="output/re
 
     # Load the image with multiple fallbacks
     print("🖼️ Loading avatar image with robust methods...")
+    
     img = load_avatar_image(face_path)
+    
     if img is None:
         print("❌ All image loading methods failed")
         return None
@@ -95,6 +94,7 @@ def generate_lip_synced_video(audio_path, face_path=None, output_path="output/re
 
     # Convert static image to video
     print("🔄 Converting avatar image to video...")
+    
     try:
         height, width = img.shape[:2]
 
@@ -113,8 +113,8 @@ def generate_lip_synced_video(audio_path, face_path=None, output_path="output/re
         for _ in range(25):
             out.write(img)
         out.release()
+        
         print(f"✅ Temporary video created at: {temp_video_path}")
-
     except Exception as e:
         print(f"❌ Video creation failed: {str(e)}")
         return None

@@ -7,12 +7,10 @@ import threading
 import pygame
 import threading
 
-
 from modules.text_to_speech import text_to_speech
 from modules.text_generation import fetch_latest_news_with_content
 from modules.avatar_generation import generate_lip_synced_video
 from main import validate_avatar, play_video
-
 
 class NewsAnchorApp:
     def __init__(self, root):
@@ -24,7 +22,7 @@ class NewsAnchorApp:
         self.news_content = ""
 
         # Load and place background image
-        bg_image_path = "news_background.png"
+        bg_image_path = "assets/news_background.png"
         bg_image = Image.open(bg_image_path)
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
@@ -68,9 +66,12 @@ class NewsAnchorApp:
         except Exception:
             self.voice_choices = []
             self.voice_ids = []
+            
             if self.voice_menu:
                 self.voice_menu.destroy()
+                
             self.voice_menu = None
+            
         # Title
         self.title_label = tk.Label(self.root, text="", font=("Times New Roman", 36, "bold"),
                                     fg="cyan", bg="#010513")
@@ -140,7 +141,7 @@ class NewsAnchorApp:
     def add_button(self, text, command, relx_value, rely_value):
         def on_click_with_sound():
             # Play the sound asynchronously using pygame
-            sound = pygame.mixer.Sound("click.wav")
+            sound = pygame.mixer.Sound("assets/audio/click.wav")
             threading.Thread(target=sound.play, daemon=True).start()
             command()
 
@@ -173,8 +174,6 @@ class NewsAnchorApp:
         else:
             self.news_content = text
             self.status_label.config(text="✅ Custom news text loaded!")
-
-    # 🟡 Add this inside your NewsAnchorApp class
 
     def show_welcome_popup(self):
         popup = tk.Toplevel(self.root)
@@ -250,7 +249,7 @@ class NewsAnchorApp:
         try:
             audio_path = text_to_speech(self.news_content, method=tts_method, voice_id=voice_id)
 
-            avatar_path = os.path.join(os.path.dirname(__file__), "avatar-tech.png")
+            avatar_path = os.path.join(os.path.dirname(__file__), "assets/avatars/avatar-tech.png")
             if not validate_avatar(avatar_path):
                 self.status_label.config(text="❌ Avatar validation failed.")
                 return
@@ -266,14 +265,7 @@ class NewsAnchorApp:
             print(f"❌ Exception: {e}")
             self.status_label.config(text=f"❌ Error occurred: {e}")
 
-
 if __name__ == "__main__":
     root = tk.Tk()
     app = NewsAnchorApp(root)
     root.mainloop()
-
-
-
-
-
-

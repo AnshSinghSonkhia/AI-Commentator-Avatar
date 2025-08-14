@@ -1,3 +1,6 @@
+Wav2Lip/checkpoints/wav2lip.pth
+Wav2Lip/checkpoints/wav2lip_gan.pth
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

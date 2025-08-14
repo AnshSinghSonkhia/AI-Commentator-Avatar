@@ -97,6 +97,7 @@ Desktop.ini
 
 # Temp Files
 temp/
+Wav2Lip/temp/
 
 # Model Checkpoints
 Wav2Lip/checkpoints/

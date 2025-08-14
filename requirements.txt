@@ -13,3 +13,6 @@ lxml_html_clean
 scipy
 pillow
 pyttsx3
+librosa
+opencv-contrib-python>=4.2.0.34
+coqui-tts[server]

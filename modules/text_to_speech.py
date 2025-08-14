@@ -25,7 +25,7 @@ def text_to_speech(news_text: str, method: str = "gtts", voice_id: str = None) -
         os.makedirs("temp")
 
     match method:
-        case 'pyttsx3':``
+        case 'pyttsx3':
             if pyttsx3 is None:
                 raise ImportError("pyttsx3 is not installed. Install it with 'pip install pyttsx3'.")
             
@@ -45,7 +45,7 @@ def text_to_speech(news_text: str, method: str = "gtts", voice_id: str = None) -
 
             tts = TTS(model_name="tts_models/en/vctk/vits", progress_bar=True)
             tts.to('cuda')
-            
+
             if not voice_id:
                 voice_id = 'p244'
             

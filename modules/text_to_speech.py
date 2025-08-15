@@ -36,8 +36,11 @@ def text_to_speech(news_text: str, method: str = "gtts", voice_id: str = None) -
 
             # Select voice based on provided voice_id or default to first voice
             if voice_id:
-                engine.setProperty('voice', voices[int(voice_id)].id)
+                engine.setProperty('voice', voice_id)
             else:
+                if not voices:
+                    raise ValueError("No voices found. Please install \"ESpeakNG\" if on linux or MacOS.\nOn Windows, ensure you have the necessary voice installed.\nGuide: https://support.microsoft.com/en-gb/topic/download-languages-and-voices-for-immersive-reader-read-mode-and-read-aloud-4c83a8d8-7486-42f7-8e46-2b0fdf753130")
+
                 engine.setProperty('voice', voices[0].id)
 
             # Save speech to file (offline)

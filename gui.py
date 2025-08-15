@@ -20,6 +20,12 @@ class NewsAnchorApp:
         self.root.attributes("-fullscreen", True)
 
         self.news_content = ""
+        
+        self.voice_data = {
+            'name': 'Basic',
+            'model': 'gtts',
+            'voice_id': 0
+        }
 
         # Load and place background image
         bg_image_path = "assets/studio.png"
@@ -64,19 +70,36 @@ class NewsAnchorApp:
         self.voice_menu.place(relx=0.40, rely=0.25, anchor="center")
         if self.voice_choices:
             self.voice_menu.set(self.voice_choices[0])
+            
+    def _on_sample_label_click(self, event):
+        try:
+            if self.voice_data and os.path.exists(f'assets/audio/sample_voices/sample_{self.voice_data["voice_id"]}.mp3'):
+                pygame.mixer.music.load(f'assets/audio/sample_voices/sample_{self.voice_data["voice_id"]}.mp3')
+                pygame.mixer.music.play()
+                pygame.mixer.music.unload()
+            else:
+                raise Exception('Sample does not exist for this voice.')
+        except Exception as e:
+            self.status_label.config(text=f"❌ Error: {str(e)}")
 
+    def _populate_sample_label(self):
+        self.sample_label = tk.Label(self.root, text="🔊", fg="white", font=("Times New Roman", 16), bg="#de2526")
+        self.sample_label.place(relx=0.50, rely=0.25, anchor="center")
+        self.sample_label.bind("<Button-1>", self._on_sample_label_click)
+        
     def setup_ui(self):
         # TTS Method Option
-        self.voice_var = tk.StringVar(value="David")
+        self.voice_var = tk.StringVar(value="Mike")
         
         tts_voice_label = tk.Label(self.root, text="Select Voice:", fg="white", font=("Times New Roman", 14), bg="#001638")
         tts_voice_label.place(relx=0.27, rely=0.25, anchor="center")
 
         self.voice_var = tk.StringVar(value="")
         self.voice_menu = None
-        
         self._populate_voice_menu()
-        
+
+        self._populate_sample_label()
+
         # Title
         self.title_label = tk.Label(self.root, text="", font=("Times New Roman", 36, "bold"),
                                     fg="white", bg="#de2526")

@@ -36,9 +36,9 @@ def text_to_speech(news_text: str, method: str = "gtts", voice_id: str = None) -
 
             # Select voice based on provided voice_id or default to first voice
             if voice_id:
-                engine.setProperty('voice', voices[int(voice_id)].id)
+                engine.setProperty('voice', voice_id)
             else:
-                engine.setProperty('voice', voices[0].id)
+                engine.setProperty('voice', 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_DAVID_11.0')
 
             # Save speech to file (offline)
             engine.save_to_file(news_text, audio_path)

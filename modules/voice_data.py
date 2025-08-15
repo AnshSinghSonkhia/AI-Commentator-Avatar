@@ -65,7 +65,7 @@ def get_voice_data(voice_name):
         'David': {
             'name': 'David',
             'model': 'pyttsx3',
-            'voice_id': '0'
+            'voice_id': 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_DAVID_11.0'
         },
         # Female
         'Faith': {
@@ -86,12 +86,12 @@ def get_voice_data(voice_name):
         'Hazel': {
             'name': 'Hazel',
             'model': 'pyttsx3',
-            'voice_id': '1'
+            'voice_id': 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-GB_HAZEL_11.0'
         },
         'Zira': {
             'name': 'Zira',
             'model': 'pyttsx3',
-            'voice_id': '2'
+            'voice_id': 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_ZIRA_11.0'
         }
     }
 

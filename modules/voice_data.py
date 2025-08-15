@@ -17,6 +17,7 @@ def get_voice_array():
         'James',
         'Michael',
         'Andrew',
+        'Shanaya',
         'Joseph',
         'Faith',
         'Phoebe',
@@ -50,6 +51,11 @@ def get_voice_data(voice_name):
             'name': 'Andrew',
             'model': 'TTS',
             'voice_id': 'p234'
+        },
+        'Shanaya': {
+            'name': 'Shanaya',
+            'model': 'TTS',
+            'voice_id': 'p240'
         },
         'Joseph': {
             'name': 'Joseph',

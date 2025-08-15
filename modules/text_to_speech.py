@@ -1,13 +1,13 @@
 import os
-from gtts import gTTS
+from gtts import gTTS     # Google Text-to-Speech (online, requires internet)
 
 try:
-    import pyttsx3
+    import pyttsx3        # (offline TTS library)
 except ImportError:
     pyttsx3 = None
     
 try:
-    from TTS.api import TTS
+    from TTS.api import TTS    # Coqui TTS (advanced TTS with multiple voices and models)
 except ImportError:
     TTS = None
 
@@ -21,39 +21,49 @@ def text_to_speech(news_text: str, method: str = "gtts", voice_id: str = None) -
     
     import os
 
+    # Ensure output directory exists
     if not os.path.exists("temp/"):
         os.makedirs("temp")
 
     match method:
         case 'pyttsx3':
+            # Check if pyttsx3 is available
             if pyttsx3 is None:
                 raise ImportError("pyttsx3 is not installed. Install it with 'pip install pyttsx3'.")
             
             engine = pyttsx3.init()
             voices = engine.getProperty('voices')
-            
+
+            # Select voice based on provided voice_id or default to first voice
             if voice_id:
                 engine.setProperty('voice', voices[int(voice_id)].id)
             else:
                 engine.setProperty('voice', voices[0].id)
-                
+
+            # Save speech to file (offline)
             engine.save_to_file(news_text, audio_path)
             engine.runAndWait()
         case 'TTS':
+            # Check if Coqui TTS is available
             if TTS is None:
                 raise ImportError("TTS is not installed. Install it with 'pip install coqui-tts'.")
 
+            # Load pretrained voice model (vits = high quality neural TTS)
             tts = TTS(model_name="tts_models/en/vctk/vits", progress_bar=True)
-            
+
+            # Use GPU if available
             import torch
             if torch.cuda.is_available():
                 tts.to('cuda')
 
+            # Default speaker if none provided
             if not voice_id:
                 voice_id = 'p244'
-            
+
+            # Generate speech to file
             tts.tts_to_file(text=news_text, speaker=voice_id, file_path=audio_path)
         case _:
+            # Default to Google TTS (online)
             tts = gTTS(text=news_text, lang="en")
             tts.save(audio_path)
 

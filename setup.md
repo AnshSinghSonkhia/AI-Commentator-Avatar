@@ -23,14 +23,18 @@
    - Download `Wav2Lip.pth` from [https://github.com/Rudrabha/Wav2Lip](https://github.com/Rudrabha/Wav2Lip)
    - Place `Wav2Lip.pth` in the project directory or inside the `Wav2Lip` folder.
 
-5. **Run the Project**
+5. **Download espeak-ng** 
+
+    - https://github.com/espeak-ng/espeak-ng/releases/tag/1.52.0
+
+6. **Run the Project**
    - Start the GUI:
      ```powershell
      python gui.py
      ```
    - Use the GUI to enter a news topic and number of news items, then click "Generate News Video".
 
-6. **Output**
+7. **Output**
    - The final video will be saved as `output/result_voice.mp4`.
 
 ---

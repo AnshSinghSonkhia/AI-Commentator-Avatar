@@ -18,7 +18,9 @@ def get_voice_array():
         'Michael',
         'Andrew',
         'Joseph',
-        'Faith'
+        'Faith',
+        'Phoebe',
+        'Zoe',
     ] + pyttsx3_voice_names
 
 def get_voice_data(voice_name):

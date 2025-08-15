@@ -5,14 +5,13 @@ except ImportError:
 
 def get_voice_array():
 
+    pyttsx3_voice_names = []
     if pyttsx3 is not None:
         engine = pyttsx3.init()
         pyttsx3_voices = engine.getProperty('voices')
-
-        pyttsx3_voice_names = []
-
         for voice in pyttsx3_voices:
-            if voice and voice.lower().startswith('microsoft'):
+            # Fix: use voice.name.lower() instead of voice.lower()
+            if voice and hasattr(voice, 'name') and voice.name.lower().startswith('microsoft'):
                 pyttsx3_voice_names.append(voice.name.split()[1])
             else:
                 pyttsx3_voice_names.append(voice.name)

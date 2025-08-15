@@ -51,23 +51,19 @@ class NewsAnchorApp:
             import pyttsx3
             engine = pyttsx3.init()
             voices = engine.getProperty('voices')
-            
             self.voice_choices = get_voice_array()
-            
-            if self.voice_menu:
-                self.voice_menu.destroy()
-                
-            self.voice_menu = ttk.Combobox(self.root, textvariable=self.voice_var, values=self.voice_choices, state="readonly", width=30)
-            self.voice_menu.bind("<<ComboboxSelected>>", self._on_voice_menu_change)
-            self.voice_menu.place(relx=0.40, rely=0.25, anchor="center")
-            self.voice_menu.set(self.voice_choices[0] if self.voice_choices else "")
         except Exception:
-            self.voice_choices = []
-            
-            if self.voice_menu:
-                self.voice_menu.destroy()
-                
-            self.voice_menu = None
+            # If pyttsx3 fails, fallback to static voice list from get_voice_array()
+            self.voice_choices = get_voice_array()
+
+        if self.voice_menu:
+            self.voice_menu.destroy()
+
+        self.voice_menu = ttk.Combobox(self.root, textvariable=self.voice_var, values=self.voice_choices, state="readonly", width=30)
+        self.voice_menu.bind("<<ComboboxSelected>>", self._on_voice_menu_change)
+        self.voice_menu.place(relx=0.40, rely=0.25, anchor="center")
+        if self.voice_choices:
+            self.voice_menu.set(self.voice_choices[0])
 
     def setup_ui(self):
         # TTS Method Option

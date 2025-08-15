@@ -38,7 +38,10 @@ def text_to_speech(news_text: str, method: str = "gtts", voice_id: str = None) -
             if voice_id:
                 engine.setProperty('voice', voice_id)
             else:
-                engine.setProperty('voice', 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_DAVID_11.0')
+                if not voices:
+                    raise ValueError("No voices found. Please install \"ESpeakNG\" if on linux or MacOS.\nOn Windows, ensure you have the necessary voice installed.\nGuide: https://support.microsoft.com/en-gb/topic/download-languages-and-voices-for-immersive-reader-read-mode-and-read-aloud-4c83a8d8-7486-42f7-8e46-2b0fdf753130")
+
+                engine.setProperty('voice', voices[0].id)
 
             # Save speech to file (offline)
             engine.save_to_file(news_text, audio_path)

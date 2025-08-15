@@ -9,7 +9,13 @@ def get_voice_array():
         engine = pyttsx3.init()
         pyttsx3_voices = engine.getProperty('voices')
 
-        pyttsx3_voice_names = [voice.name.split()[1] for voice in pyttsx3_voices]
+        pyttsx3_voice_names = []
+
+        for voice in pyttsx3_voices:
+            if voice and voice.lower().startswith('microsoft'):
+                pyttsx3_voice_names.append(voice.name.split()[1])
+            else:
+                pyttsx3_voice_names.append(voice.name)
 
     return [
         'Basic',

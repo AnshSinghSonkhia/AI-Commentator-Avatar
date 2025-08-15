@@ -5,11 +5,11 @@ from PIL import Image, ImageTk
 import os
 import threading
 import pygame
-import threading
 
 from modules.text_to_speech import text_to_speech
 from modules.text_generation import fetch_latest_news_with_content
 from modules.avatar_generation import generate_lip_synced_video
+from modules.voice_data import get_voice_array, get_voice_data
 from main import validate_avatar, play_video
 
 class NewsAnchorApp:
@@ -35,43 +35,52 @@ class NewsAnchorApp:
         self.setup_ui()
 
         # Typing animation for title
-        self.title_text = "🎙️AI Virtual News Anchor "
+        self.title_text = "🎙️AI Virtual News Anchor"
         self.title_label.after(100, self.type_text, 0)
         self.root.after(100, self.show_welcome_popup)  # 👈 This shows the popup after the GUI loads
+        
+    def _on_voice_menu_change(self, event):
+        value = self.voice_menu.get()
 
-    def setup_ui(self):
-        # TTS Method Option
-        self.tts_method_var = tk.StringVar(value="gtts")
-        tts_method_label = tk.Label(self.root, text="TTS Method:", fg="white", font=("Times New Roman", 14), bg="#de2526")
-        tts_method_label.place(relx=0.27, rely=0.25, anchor="center")
-        self.tts_method_menu = ttk.Combobox(self.root, textvariable=self.tts_method_var, values=["gtts", "pyttsx3"], state="readonly", width=10)
-        self.tts_method_menu.place(relx=0.36, rely=0.25, anchor="center")
+        voice_data = get_voice_data(value)
+        if voice_data:
+            self.voice_data = voice_data
 
-        # pyttsx3 Voice Option (populated if pyttsx3 is available)
-        self.voice_var = tk.StringVar(value="")
-        self.voice_menu = None
-        self._populate_voice_menu()
     def _populate_voice_menu(self):
         try:
             import pyttsx3
             engine = pyttsx3.init()
             voices = engine.getProperty('voices')
-            self.voice_choices = [f"{voice.name} ({voice.id})" for voice in voices]
-            self.voice_ids = [voice.id for voice in voices]
+            
+            self.voice_choices = get_voice_array()
+            
             if self.voice_menu:
                 self.voice_menu.destroy()
+                
             self.voice_menu = ttk.Combobox(self.root, textvariable=self.voice_var, values=self.voice_choices, state="readonly", width=30)
-            self.voice_menu.place(relx=0.575, rely=0.25, anchor="center")
+            self.voice_menu.bind("<<ComboboxSelected>>", self._on_voice_menu_change)
+            self.voice_menu.place(relx=0.40, rely=0.25, anchor="center")
             self.voice_menu.set(self.voice_choices[0] if self.voice_choices else "")
         except Exception:
             self.voice_choices = []
-            self.voice_ids = []
             
             if self.voice_menu:
                 self.voice_menu.destroy()
                 
             self.voice_menu = None
-            
+
+    def setup_ui(self):
+        # TTS Method Option
+        self.voice_var = tk.StringVar(value="David")
+        
+        tts_voice_label = tk.Label(self.root, text="Select Voice:", fg="white", font=("Times New Roman", 14), bg="#001638")
+        tts_voice_label.place(relx=0.27, rely=0.25, anchor="center")
+
+        self.voice_var = tk.StringVar(value="")
+        self.voice_menu = None
+        
+        self._populate_voice_menu()
+        
         # Title
         self.title_label = tk.Label(self.root, text="", font=("Times New Roman", 36, "bold"),
                                     fg="white", bg="#de2526")
@@ -236,31 +245,24 @@ class NewsAnchorApp:
         self.status_label.config(text="🔧 Generating video...")
         self.root.update()
 
-        # Get TTS method and voice
-        tts_method = self.tts_method_var.get()
-        voice_id = None
-        if tts_method == "pyttsx3" and self.voice_menu and self.voice_choices:
-            idx = self.voice_choices.index(self.voice_var.get()) if self.voice_var.get() in self.voice_choices else 0
-            voice_id = self.voice_ids[idx] if idx < len(self.voice_ids) else None
+        threading.Thread(target=self._generate_video_thread).start()
 
-        threading.Thread(target=self._generate_video_thread, args=(tts_method, voice_id)).start()
-
-    def _generate_video_thread(self, tts_method, voice_id):
+    def _generate_video_thread(self):
         try:
-            audio_path = text_to_speech(self.news_content, method=tts_method, voice_id=voice_id)
-
+            audio_path = text_to_speech(self.news_content, method=self.voice_data['model'], voice_id=self.voice_data['voice_id'] if self.voice_data['voice_id'] else None)
             avatar_path = os.path.join(os.path.dirname(__file__), "assets/avatars/avatar-tech.png")
+            
             if not validate_avatar(avatar_path):
                 self.status_label.config(text="❌ Avatar validation failed.")
                 return
 
             video_path = generate_lip_synced_video(audio_path, avatar_path)
+            
             if video_path and os.path.exists(video_path):
                 self.status_label.config(text=f"🎉 Video ready: {video_path}")
                 play_video(video_path)
             else:
                 self.status_label.config(text="❌ Video generation failed.")
-
         except Exception as e:
             print(f"❌ Exception: {e}")
             self.status_label.config(text=f"❌ Error occurred: {e}")

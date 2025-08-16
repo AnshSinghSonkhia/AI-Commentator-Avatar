@@ -1,4 +1,4 @@
-# <img width="32" height="32" alt="image" src="https://github.com/user-attachments/assets/033acf25-7748-4ea3-a04f-b4c0b54bed0e" /> AI Sports Commentator & News Anchor 
+# <img width="32" height="32" alt="image" src="https://github.com/user-attachments/assets/033acf25-7748-4ea3-a04f-b4c0b54bed0e" /> Orare AI: Text to AI Avatar Video Gen
 
 
 <p align="center">
@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <b>An AI-powered virtual sports commentator and news anchor that brings your sports updates to life!</b>
+  <b>An advanced AI-powered platform for generating realistic talking avatar videos from any text script. The system automates text-to-speech conversion, lip-synced video creation, and avatar animation using deep learning, allowing users to create lifelike virtual presenters for various contexts—news, education, announcements, and more. Features include multiple text-to-speech engine options (online/offline), voice selection, and an intuitive interface available both as a desktop GUI and web app. The solution streamlines content production for anyone seeking dynamic, engaging video presentations.</b>
 </p>
 
 ---
@@ -30,9 +30,11 @@
   </a>
 </p>
 
+<!--
 ## 🌟 Overview
 
-Transform sports news and live commentary into engaging video content with our AI-powered virtual anchor system. This cutting-edge application automatically fetches sports news, converts text to natural speech, and generates realistic lip-synced videos featuring an AI avatar - perfect for sports commentary, match updates, and news broadcasting.
+Transform news and live sports commentary into engaging video content with our AI-powered virtual anchor system. This cutting-edge application automatically fetches sports news, converts text to natural speech, and generates realistic lip-synced videos featuring an AI avatar - perfect for sports commentary, match updates, and news broadcasting.
+-->
 
 ## ✨ Key Features
 

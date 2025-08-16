@@ -74,6 +74,9 @@ class NewsAnchorApp:
     def _on_sample_label_click(self, event):
         try:
             if self.voice_data and os.path.exists(f'assets/audio/sample_voices/sample_{self.voice_data["voice_id"]}.mp3'):
+                # pygame.mixer.music.load(f'assets/audio/sample_voices/sample_{self.voice_data["voice_id"]}.mp3')
+                # pygame.mixer.music.play()
+                # pygame.mixer.music.unload()
                 sample = pygame.mixer.Sound(f'assets/audio/sample_voices/sample_{self.voice_data["voice_id"]}.mp3')
                 sample.play()
             else:

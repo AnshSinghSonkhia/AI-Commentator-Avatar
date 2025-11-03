@@ -13,7 +13,6 @@ COPY requirements.txt* setup.py* /workspace/
 RUN pip install --upgrade pip \
     && if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-RUN useradd --create-home devuser && chown -R devuser:devuser /workspace
-USER devuser
+USER root
 
 EXPOSE 8501

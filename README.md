@@ -23,7 +23,7 @@
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=KXMh7-ApLBg" target="_blank">
-    <img src="https://github.com/user-attachments/assets/837fd679-4163-43e2-af0e-31fdb0e4a65f" 
+    <img src="https://github.com/AnshSinghSonkhia/AI-Commentator-Avatar/blob/main/assets/avatars/avatar-tech.png" 
          alt="Ansh Singh Sonkhia on News" 
          width="2816" height="1536"/
     >

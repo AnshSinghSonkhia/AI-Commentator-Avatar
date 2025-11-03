@@ -1,4 +1,4 @@
-# <img width="32" height="32" alt="image" src="https://github.com/user-attachments/assets/033acf25-7748-4ea3-a04f-b4c0b54bed0e" /> Orare AI: Text to AI Avatar Video Gen
+# 🔥 Orare AI: Text to AI Avatar Video Gen
 
 
 <p align="center">
